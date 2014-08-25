@@ -37,3 +37,5 @@ buildscript {
         classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
+
+apply from: 'maven-push.gradle'
