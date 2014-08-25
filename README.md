@@ -1,4 +1,4 @@
-AndroidMockServer
+AndroidStubServer
 =================
 
-Simple REST server that makes simulating API easy.
+Simple Http server that makes simulating API easy.
