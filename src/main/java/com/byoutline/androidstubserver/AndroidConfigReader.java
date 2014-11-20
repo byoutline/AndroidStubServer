@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * Default Android <code>ConfigReader</code>.<br />
+ * Reads configuration and responses from assets <code>mock</code> folder.
+ *
  * @author Sebastian Kacprzak <nait at naitbit.com>
  */
 public class AndroidConfigReader implements ConfigReader {
