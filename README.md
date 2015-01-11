@@ -10,7 +10,7 @@ Create ```mock``` folder in your assetes directory (```src/main/assets``` by def
 You can find ```config.json``` description  at <a href="https://github.com/byoutline/MockServer">MockServer</a>.
 If you have any static content(like images or .html files) put them in ```mock/static``` folder.
 
-Now you can start server:
+Now you can start server by passing it context and simulated network type:
 ```java
-HttpMockServer.startMockApiServer(configReader, NetworkType.VPN);
+AndroidStubServer.start(this, NetworkType.EDGE);
 ```
