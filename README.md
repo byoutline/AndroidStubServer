@@ -6,6 +6,10 @@ Simple Http server that makes simulating API easy.
 How to use
 ----------
 
+* Add dependency to build.gradle:
+```java
+compile 'com.byoutline.androidstubserver:stubserver:1.2.0'
+```
 * Create ```mock``` folder in your assetes directory (```src/main/assets``` by default in gradle). 
 * Put there a ```config.json``` file.
 * You can find ```config.json``` description  at <a href="https://github.com/byoutline/MockServer">MockServer</a>.
