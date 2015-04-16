@@ -1,6 +1,10 @@
 AndroidStubServer
 =================
-
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.byoutline.androidstubserver/stubserver/badge.svg?style=flat)](http://mvnrepository.com/artifact/com.byoutline.androidstubserver/stubserver)
+<---[![Coverage Status](https://coveralls.io/repos/byoutline/AndroidStubServer/badge.svg?branch=master)](https://coveralls.io/r/byoutline/AndroidStubServer?branch=master)-->
+ master:  [![Build Status](https://travis-ci.org/byoutline/AndroidStubServer.svg?branch=master)](https://travis-ci.org/byoutline/AndroidStubServer)
+ develop: [![Build Status](https://travis-ci.org/byoutline/AndroidStubServer.svg?branch=develop)](https://travis-ci.org/byoutline/AndroidStubServer)
+ 
 Simple Http server that makes simulating API easy.
 
 How to use
