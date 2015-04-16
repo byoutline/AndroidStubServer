@@ -1,4 +1,6 @@
-apply plugin: 'com.android.library'
+apply plugin: 'java'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 buildscript {
     repositories {
@@ -8,45 +10,30 @@ buildscript {
     }
 
     dependencies {
-//        classpath 'net.saliman:gradle-cobertura-plugin:2.0.0' // cobertura plugin
-//        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
+        classpath 'net.saliman:gradle-cobertura-plugin:2.0.0' // cobertura plugin
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
         classpath 'com.android.tools.build:gradle:1.0.0'
     }
 }
 
-//apply from: 'gradle/byoutline/javaLib.gradle'
+apply from: 'gradle/byoutline/javaLib.gradle'
 
 repositories {
     mavenCentral()
     maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
-android {
-    compileSdkVersion 21
-    buildToolsVersion '21.1.1'
-
-    defaultConfig {
-        minSdkVersion 1
-        targetSdkVersion 21
-        versionCode 3
-        versionName "1.3.0-SNAPSHOT"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_6
-        targetCompatibility JavaVersion.VERSION_1_6
-    }
+configurations{
+    provided
 }
+
+sourceSets.main.compileClasspath += configurations.provided
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.byoutline.mockserver:mockserver:1.3.0-SNAPSHOT'
     compile 'com.google.code.findbugs:jsr305:2.0.3'
+    provided 'com.google.android:android:4.1.1.4'
 }
 
 apply from: 'maven-push.gradle'
