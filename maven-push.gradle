@@ -35,7 +35,7 @@ def getSnapshotRepositoryUrl() {
 }
 
 project.ext.set("props", new Properties())
-if (file("push.properties").exists()) {
+if (new File("push.properties").exists()) {
     props.load(new FileInputStream("push.properties"))
 }
 
