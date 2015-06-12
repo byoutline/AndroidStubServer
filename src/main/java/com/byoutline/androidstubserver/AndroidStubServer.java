@@ -1,7 +1,6 @@
 package com.byoutline.androidstubserver;
 
 import android.content.Context;
-
 import com.byoutline.mockserver.ConfigReader;
 import com.byoutline.mockserver.HttpMockServer;
 import com.byoutline.mockserver.NetworkType;
@@ -25,8 +24,8 @@ public final class AndroidStubServer {
      * @param context     context that provides access to assets folder.
      * @param networkType network type to be simulated by adding extra delays.
      */
-    public static void start(Context context, NetworkType networkType) {
-        start(new AndroidConfigReader(context), networkType);
+    public static HttpMockServer start(Context context, NetworkType networkType) {
+        return start(new AndroidConfigReader(context), networkType);
     }
 
     /**
@@ -35,7 +34,7 @@ public final class AndroidStubServer {
      * @param configReader reader that provides access to responses configuration, responses and static files
      * @param networkType  network type to be simulated by adding extra delays.
      */
-    public static void start(ConfigReader configReader, NetworkType networkType) {
-        HttpMockServer.startMockApiServer(configReader, networkType);
+    public static HttpMockServer start(ConfigReader configReader, NetworkType networkType) {
+        return HttpMockServer.startMockApiServer(configReader, networkType);
     }
 }
