@@ -8,7 +8,7 @@ How to use
 
 * Add dependency to build.gradle:
 ```java
-compile 'com.byoutline.androidstubserver:stubserver:1.2.0'
+compile 'com.byoutline.androidstubserver:stubserver:1.3.0'
 ```
 * Create ```mock``` folder in your assetes directory (```src/main/assets``` by default in gradle). 
 * Put there a ```config.json``` file.
