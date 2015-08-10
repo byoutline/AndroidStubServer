@@ -1,7 +1,6 @@
 package com.byoutline.androidstubserver;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import com.byoutline.mockserver.ConfigReader;
 
 import java.io.IOException;
@@ -32,17 +31,27 @@ public class AndroidConfigReader implements ConfigReader {
     }
 
     @Override
-    public InputStream getResponseConfigFromFile(String fileName) throws IOException {
-        return context.getAssets().open("mock/" + fileName);
+    public InputStream getResponseConfigFromFile(String relativePath) throws IOException {
+        return context.getAssets().open("mock/" + relativePath);
     }
 
     @Override
-    public InputStream getStaticFile(String fileName) throws IOException {
-        String path = "mock/static" + fileName;
-        AssetManager assets = context.getAssets();
-        if(assets.list(path).length > 0) {
-            return assets.open(path + "/index.html");
+    public InputStream getStaticFile(String relativePath) throws IOException {
+        String path = getStaticFilePath(relativePath);
+        return context.getAssets().open(path);
+    }
+
+    @Override
+    public boolean isFolder(String relativePath) {
+        try {
+            String path = getStaticFilePath(relativePath);
+            return context.getAssets().list(path).length > 0;
+        } catch (IOException e) {
+            return false;
         }
-        return assets.open(path);
+    }
+
+    private String getStaticFilePath(String relativePath) {
+        return "mock/static" + relativePath;
     }
 }
