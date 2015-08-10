@@ -1,7 +1,7 @@
 package com.byoutline.androidstubserver;
 
 import android.content.Context;
-
+import android.content.res.AssetManager;
 import com.byoutline.mockserver.ConfigReader;
 
 import java.io.IOException;
@@ -38,6 +38,11 @@ public class AndroidConfigReader implements ConfigReader {
 
     @Override
     public InputStream getStaticFile(String fileName) throws IOException {
-        return context.getAssets().open("mock/static" + fileName);
+        String path = "mock/static" + fileName;
+        AssetManager assets = context.getAssets();
+        if(assets.list(path).length > 0) {
+            return assets.open(path + "/index.html");
+        }
+        return assets.open(path);
     }
 }
