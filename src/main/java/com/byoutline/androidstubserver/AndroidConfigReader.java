@@ -31,7 +31,7 @@ public class AndroidConfigReader implements ConfigReader {
     }
 
     @Override
-    public InputStream getResponseConfigFromFile(String relativePath) throws IOException {
+    public InputStream getPartialConfigFromFile(String relativePath) throws IOException {
         return context.getAssets().open("mock/" + relativePath);
     }
 
