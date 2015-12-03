@@ -34,30 +34,12 @@ def getSnapshotRepositoryUrl() {
             : "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
-project.ext.set("props", new Properties())
-if (new File("push.properties").exists()) {
-    props.load(new FileInputStream("push.properties"))
-}
-
-gradle.taskGraph.whenReady { taskGraph ->
-    Properties p = project.props
-    if (p['signing.secretKeyRingFile'] != null) {
-        if (taskGraph.allTasks.any { it instanceof Sign }) {
-            allprojects { ext."signing.keyId" = p['signing.keyId'] }
-            allprojects { ext."signing.password" = p['signing.password'] }
-            allprojects { ext."signing.secretKeyRingFile" = p['signing.secretKeyRingFile'] }
-        }
-    }
-}
-
 def getRepositoryUsername() {
-    Properties p = project.props
-    return p['USERNAME'] != null ? p['USERNAME'] : (p['NEXUS_USERNAME'] != null ? p['NEXUS_USERNAME'] : '')
+    return hasProperty('USERNAME') ? USERNAME : (hasProperty('NEXUS_USERNAME')?NEXUS_USERNAME:"")
 }
 
 def getRepositoryPassword() {
-    Properties p = project.props
-    return p['PASSWORD'] != null ? p['PASSWORD'] : (p['NEXUS_PASSWORD'] != null ? p['NEXUS_PASSWORD'] : '')
+    return hasProperty('PASSWORD') ? PASSWORD : (hasProperty('NEXUS_PASSWORD')?NEXUS_PASSWORD:"")
 }
 
 afterEvaluate { project ->
