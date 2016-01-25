@@ -22,3 +22,26 @@ Now you can start server by passing it context and simulated network type:
 ```java
 AndroidStubServer.start(this, NetworkType.EDGE);
 ```
+
+Placeholder images
+------------------
+If your API returns images urls you can also mock them.
+
+
+In your config place set url as 
+```http://localhost:PORT/mock/img/WIDTHxHEIGHT```
+
+for example:
+
+```http://localhost:8099/mock/img/560x420/ff0000/00FFFF```
+
+will cause stub server will return png image with width of 520, height of 420, dark grey background and light grey text. 
+
+
+You can also customize background color:
+
+```http://localhost:8099/mock/img/560x420/RRGGBB```
+
+and foreground color:
+
+```http://localhost:8099/mock/img/560x420/RRGGBB/RRGGBB```
