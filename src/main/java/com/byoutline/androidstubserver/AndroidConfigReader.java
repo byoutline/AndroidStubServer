@@ -1,7 +1,7 @@
 package com.byoutline.androidstubserver;
 
 import android.content.Context;
-
+import com.byoutline.androidstubserver.internal.ImageGenerator;
 import com.byoutline.mockserver.ConfigReader;
 
 import java.io.IOException;
@@ -15,7 +15,10 @@ import java.io.InputStream;
  */
 public class AndroidConfigReader implements ConfigReader {
 
-    private static final String DEFAULT_CONFIG_FILE_LOCATION = "mock/config.json";
+    public static final String CONFIG_FOLDER_PATH = "mock/";
+    public static final String STATIC_FILE_PATH = CONFIG_FOLDER_PATH + "static";
+    public static final String GENERATE_IMAGES_PATH = "/" + CONFIG_FOLDER_PATH + "img/";
+    private static final String DEFAULT_CONFIG_FILE_LOCATION = CONFIG_FOLDER_PATH + "config.json";
     private final Context context;
     private final String configFileLocation;
 
@@ -40,11 +43,14 @@ public class AndroidConfigReader implements ConfigReader {
 
     @Override
     public InputStream getPartialConfigFromFile(String relativePath) throws IOException {
-        return context.getAssets().open("mock/" + relativePath);
+        return context.getAssets().open(CONFIG_FOLDER_PATH + relativePath);
     }
 
     @Override
     public InputStream getStaticFile(String relativePath) throws IOException {
+        if(relativePath.startsWith(GENERATE_IMAGES_PATH)) {
+            return ImageGenerator.generateImage(relativePath.substring(GENERATE_IMAGES_PATH.length()));
+        }
         String path = getStaticFilePath(relativePath);
         return context.getAssets().open(path);
     }
@@ -60,6 +66,6 @@ public class AndroidConfigReader implements ConfigReader {
     }
 
     private String getStaticFilePath(String relativePath) {
-        return "mock/static" + relativePath;
+        return STATIC_FILE_PATH + relativePath;
     }
 }
