@@ -18,16 +18,23 @@ public class AndroidConfigReader implements ConfigReader {
     public static final String CONFIG_FOLDER_PATH = "mock/";
     public static final String STATIC_FILE_PATH = CONFIG_FOLDER_PATH + "static";
     public static final String GENERATE_IMAGES_PATH = "/" + CONFIG_FOLDER_PATH + "img/";
+    private static final String DEFAULT_CONFIG_FILE_LOCATION = CONFIG_FOLDER_PATH + "config.json";
     private final Context context;
+    private final String configFileLocation;
 
     public AndroidConfigReader(Context context) {
+        this(context, DEFAULT_CONFIG_FILE_LOCATION);
+    }
+
+    public AndroidConfigReader(Context context, String configFileLocation) {
         this.context = context;
+        this.configFileLocation = configFileLocation;
     }
 
     @Override
     public InputStream getMainConfigFile() {
         try {
-            return context.getAssets().open(CONFIG_FOLDER_PATH + "config.json");
+            return context.getAssets().open(configFileLocation);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
