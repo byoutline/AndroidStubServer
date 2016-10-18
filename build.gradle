@@ -27,7 +27,11 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.byoutline.mockserver:mockserver:2.0.0-beta1'
+    compile ('com.byoutline.mockserver:mockserver:2.0.0-beta1') {
+        // Use Android provided versions of httpclient and json
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'org.json', module: 'json'
+    }
     compile 'com.google.code.findbugs:jsr305:2.0.3'
     provided 'com.google.android:android:4.1.1.4'
 }
