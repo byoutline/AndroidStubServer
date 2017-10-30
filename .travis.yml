@@ -1,11 +1,29 @@
 language: java
 
-jdk:
-  - openjdk6
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - openjdk-6-jdk
+
+jdk: openjdk7
 
 notifications:
   email:
     - sebastian.kacprzak@byoutline.com
 
+# Workaround for gradle wrapper download failure:
+# SSLException: java.security.ProviderException:
+# java.security.InvalidKeyException: EC parameters error
+# Caused by: java.security.NoSuchProviderException: no such provider: SunEC
+before_install:
+ - sudo sed -i 's/security.provider.9/#security.provider.9/g' $JAVA_HOME/jre/lib/security/java.security
+
+
 env:
   - JAVA6_HOME=/usr/lib/jvm/java-6-openjdk-amd64
+
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls

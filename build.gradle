@@ -1,23 +1,22 @@
-apply plugin: 'java'
-apply plugin: 'propdeps'
-
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
 buildscript {
     repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        maven {  url "https://plugins.gradle.org/m2/" }
         maven { url 'http://repo.spring.io/plugins-release' }
     }
 
     dependencies {
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1'
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:2.1.0'
         classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.7'
     }
 }
 
+plugins {
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.8.2'
+}
+
+apply plugin: 'java'
+apply plugin: 'propdeps'
 apply from: 'gradle/byoutline/javaLib.gradle'
 
 repositories {
@@ -37,3 +36,10 @@ dependencies {
 }
 
 apply from: 'maven-push.gradle'
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled =  true
+    }
+}
