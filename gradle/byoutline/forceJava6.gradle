@@ -7,5 +7,10 @@ compileJava {
         logger.warn("JAVA6_HOME enviromental variable not found. " +
                 'Please set it so compatibility can be checked')
     }
-    options.bootClasspath = (new File(jdk6Home, "/jre/lib/rt.jar")).canonicalPath
+    def lib = new File((String) jdk6Home, "/jre/lib/rt.jar")
+    if (lib.exists()) {
+        options.bootClasspath = lib.canonicalPath
+    } else {
+        logger.warn(lib.absolutePath + " does not exist")
+    }
 }
